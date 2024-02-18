@@ -53,12 +53,6 @@ export const fitnessReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
-    case 'ADD_ENTRY_FAILURE':
-      return {
-        ...state,
-        loading: false,
-        error: 'Error adding entry data'
-      }
     case 'ADD_EXERCISE_SUCCESS':
       return {
         ...state,
@@ -79,6 +73,33 @@ export const fitnessReducer = (state = initialState, action) => {
         goals: [...state.goals, action.payload],
         loading: false,
         error: null
+      }
+    case 'ADD_ENTRY_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: 'Error adding entry data'
+      }
+    case 'DELETE_EXERCISE_SUCCESS':
+      return {
+        ...state,
+        exercises: state.exercises.filter(({ _id }) => _id !==action.payload)
+      }
+    case 'DELETE_FOOD_SUCCESS':
+      return {
+        ...state,
+        foods: state.foods.filter(({ _id }) => _id !== action.payload)
+      }
+    case 'DELETE_GOAL_SUCCESS':
+      return {
+        ...state,
+        goals: state.goals.filter(({ _id }) => _id !== action.payload)
+      }
+    case 'DELETE_FAILURE':
+      return{
+        ...state,
+        loading: false,
+        error: 'Error deleting data'
       }
     default:
       return state
