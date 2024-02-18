@@ -8,28 +8,23 @@ export const Dashboard = () => {
   const foods = useSelector((state) => state.foods.foods);
   const goals = useSelector((state) => state.goals.goals);
 
-  
   useEffect(() => {
     dispatch(getAllExercises());
     dispatch(getAllFoods());
     dispatch(getAllGoals());
   }, [dispatch]);
 
-  
-  const totalCaloriesBurned =exercises? (exercises.reduce(
-    (acc, curr) => acc + (curr.calorieBurnRates || 0),
-    0
-  )):("Please add exercise");
+  const totalCaloriesBurned = exercises
+    ? exercises.reduce((acc, curr) => acc + (curr.calorieBurnRates || 0), 0)
+    : 0;
 
-  const totalCaloriesConsumed =foods?( foods.reduce(
-    (acc, curr) => acc + (curr.calories || 0),
-    0
-  )):("Please add food");
+  const totalCaloriesConsumed = foods
+    ? foods.reduce((acc, curr) => acc + (curr.calories || 0), 0)
+    : 0;
 
-  const totalCaloriesGoal = goals?(goals.reduce(
-    (acc, curr) => acc + (curr.targetCalories || 0),
-    0
-  )):("Please add goal");
+  const totalCaloriesGoal = goals
+    ? goals.reduce((acc, curr) => acc + (curr.targetCalories || 0), 0)
+    : 0;
 
   const remainingCaloriesToGoal = totalCaloriesGoal - totalCaloriesBurned;
 
